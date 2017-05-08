@@ -1,0 +1,28 @@
+#open file
+name = raw_input("Enter file:")
+if len(name) < 1 : name = "xxx.txt"
+handle = open(name)
+
+#parse text - 
+#split whole text into a list of strings containing only time item and count/create 
+#each occurence of an hour
+
+count=dict()
+
+for i in handle:
+    if i.startswith("From") and len(i.split())>2:
+        time = i.split()     
+#print time
+        if not count.has_key(time[5][:2]):
+            count[time[5][:2]] = 1
+        else:
+            count[time[5][:2]] += 1
+
+lst = list()
+for key,val in count.items():
+    lst.append((key,val))
+
+#sort by key    
+lst.sort(reverse=False)
+for key,val in lst:
+    print key,val
