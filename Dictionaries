@@ -1,0 +1,33 @@
+#open file
+name = raw_input("Enter file:")
+if len(name) < 1 : name = "mbox-short.txt"
+handle = open(name)
+
+#split whole text into strings
+#Want to know who sent you the most emails?
+#create list of emails from strings
+#by parsing emails from every line
+emails = [i.split()[1] for i in handle.readlines() 	
+		if i.startswith("From") and i.find("@")>0 and len(i.split())>2]
+
+#create dictionary + counter
+#Look up each email in email list and count each occurence (create or increment values)
+counts = dict()
+for i in emails:
+    counts[i] = counts.get(i,0) + 1
+
+#Write a largest loop to find the largest count and what word it is.
+#Set both to none, use 2 iteration variable pattern,
+#Go thru eahc two pair (word and count)
+#If the largest # so far is none,
+#or the current count found is greater than the largest I have seen so far,
+#keep them and put in bigcount/bigword,
+#at the end print out word most common and how many times. 
+
+bigcount = None
+bigemail = None
+for i,count in counts.items():
+    if bigcount is None or count>bigcount:
+        bigword = i
+        bigcount = count
+print bigword, bigcount
